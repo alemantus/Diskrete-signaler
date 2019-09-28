@@ -26,23 +26,35 @@ close all
     o = 21;
     
     % Time data.
-    %h(:, 1) = (0:dt:T)';
+    h(:, 1) = (0:dt:T)';
     
     % For the first 22 th
-    h(1:o+1,1) = h(1:o+1,1)+(1/(o+1));
+    h(1:o+1,2) = h(1:o+1,2)+(1/(o+1));
     
      % Amplitude, Signal freqency, Phae, Sample freqency, Periode time.
-    [time_vector signal] = generate_sinusoid(1, 500, 0, 10*10^3, 1);
+    [time_vector signal] = generate_sinusoid(1, 1818, 0, 10*10^3, 1);
     
     % H(w)
-    [H freq] = make_spectrum(h,fs);
-    plot(freq, H)
-    % b = (1/o+1)*[ones(o+1,1)];
-    %a = 1;
+    [H freq] = make_spectrum(h(:,2),fs);
+    
+    %subplot(2,1,1)
+    plot(freq,abs(H))
+    grid on
+    set(gca,'fontsize',14);
+    title('Spectrum of impuls response abs(H(w))')
+    xlabel('Frequency [Hz]')
+    ylabel('Amplitude')
+    xlim([0,5000])
+    
+    %subplot(2,1,2)
+    %plot(conv(signal', h(:,2)));
+    %grid on
+   % b = (1/o+1)*[ones(o+1,1)];
+   % a = 1;
    % y = filter(b,a,signal');
-    %plot(y);
+   %plot(y);
     %hold on
-   % plot(Convolution(signal', h(:,1)));
+   % 
    % hold on
    % plot(y)
    % legend('Signal n(x)','System response y(n)=x(n)*h(n)', 'Matlab filter')
