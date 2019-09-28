@@ -29,20 +29,17 @@ close all
     %h(:, 1) = (0:dt:T)';
     
     % For the first 22 th
-    h(1:o+1,1) = h(1:o+1,1)+(1/(o+1));
+    h(1:o+1,1) = h(1:o+1,1)+(1/());
     
      % Amplitude, Signal freqency, Phae, Sample freqency, Periode time.
-    [time_vector signal] = generate_sinusoid(1, 500, 0, 10*10^3, 1);
+    [time_vector signal] = generate_sinusoid(1, 1000, 0, 10*10^3, 1);
     
-    % H(w)
-    [H freq] = make_spectrum(h,fs);
-    plot(freq, H)
-    % b = (1/o+1)*[ones(o+1,1)];
-    %a = 1;
-   % y = filter(b,a,signal');
+     b = (1/22)*[ones(22,1)];
+    a = 1;
+    y = filter(b,a,signal');
     %plot(y);
-    %hold on
+    hold on
    % plot(Convolution(signal', h(:,1)));
-   % hold on
-   % plot(y)
-   % legend('Signal n(x)','System response y(n)=x(n)*h(n)', 'Matlab filter')
+    hold on
+    plot(y)
+    legend('Signal n(x)','System response y(n)=x(n)*h(n)', 'Matlab filter')
