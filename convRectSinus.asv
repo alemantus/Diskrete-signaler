@@ -1,0 +1,6 @@
+syms x
+
+fplot(rectangularPulse(x), [-pi(),pi()])
+hold on
+fplot(sin(x/pi()*0.5), [-pi(),pi()])
+hold off
