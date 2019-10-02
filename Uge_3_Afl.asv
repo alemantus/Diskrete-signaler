@@ -93,25 +93,24 @@ clc
     hold off
     % Plot dB
     figure(3)
-    plot(log10(freq), 20*log10((Y)));
+    plot(freq, 20*log10(abs(Y)));
     grid on
     ylabel('Amplitude [dB]')
-    xlabel('Frequency [log10(Hz)]')
+    xlabel('Frequency [Hz]')
     
     figure (4)
-    % Because matlab clips the signal at +1 and -1 we normalize our signal
+    % Because matlab clips the signal at
     Signal_normalized = Signal/max(abs(Signal));
     audiowrite('test1.wav',Signal_normalized,fs, 'BitsPerSample',16);
     [g,Fsh] = audioread('test1.wav');
     info = audioinfo('test1.wav');
     
-    % get time song vector
+    % Hent tiden for sangen.
     t = 0:(1/Fsh):(info.Duration);
     t = t(1:end-1);
-    
-    
     hold on
-    plot(Time, Signal_normalized);
+    plot(Time, Signal/max(abs(Signal)));
+
     plot(t, g, '--');
     xlim([0.85, 0.925]);
     legend('Original signal', '.wav signal');
@@ -138,7 +137,7 @@ clc
 
         for g = 1:N-1    
             for k = 0:4
-                Signal(g,1) = Signal(g,1) + sin(2*pi*(2^k)*f_0*g*dT+k*pi/3);
+                Signal(g,1) = Signal(g,1) + cos(2*pi*(2^k)*f_0*g*dT+k*pi/3);
             end
           
         end
