@@ -55,39 +55,48 @@ clc
     plot(Time, Signal);
     grid on
     xlim([0.8, 0.9]);
+        ylabel('Amplitude')
+    xlabel('Time [s]')
+     set(gca,'Fontsize',14)
      
     % Plot amplitude.
     subplot(3, 1, 2);
-    plot(freq, abs(Y));
+    stem(freq, abs(Y));
     grid on
     ylabel('Amplitude')
     xlabel('Frequency [Hz]')
+    set(gca,'Fontsize',14)
     
     % Plot phase.
     subplot(3, 1, 3);
-    plot(freq, angle(Y));
+    stem(freq(abs(Y) > 0.01), angle(Y(abs(Y) > 0.1)));
     grid on
     ylabel('Phase [rad]')
     xlabel('Frequency [Hz]')
+        %set(gca, 'linewidth',2)
+set(gca,'Fontsize',14)
     
-    
+%print -dpng -r300 1
     % Plot real part.
     figure (2)
     subplot(2, 1, 1);
-    plot(freq, real(Y));
+    stem(freq, real(Y));
     grid on
     ylabel('Amplitude')
     xlabel('Frequency [Hz]') 
     title('Real')
+         set(gca,'Fontsize',14)
     
     % Plot imaginary part.
     subplot(2, 1, 2);
-    plot(freq, imag(Y));
+    stem(freq, imag(Y));
     grid on
     ylabel('Amplitude')
     xlabel('Frequency [Hz]') 
     title('Imaginary')
+         set(gca,'Fontsize',14)
     
+   % print -dpng -r300 2
     
     figure (3)
     audiowrite('test1.wav',Signal,fs,  'BitsPerSample',32);
@@ -125,9 +134,9 @@ clc
         n = 0:1:N-1;
 
 
-        for g = 1:N-1    
+        for g = 0:N-1    
             for k = 0:4
-                Signal(g,1) = Signal(g,1) + cos(2*pi*(2^k)*f_0*g*dT+k*pi/3);
+                Signal(g+ 1,1) = Signal(g + 1,1) + cos(2*pi*(2^k)*f_0*g*dT+k*pi/3);
             end
           
         end
